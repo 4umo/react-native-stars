@@ -1,0 +1,30 @@
+{
+  "name": "react-native-stars",
+  "version": "1.0.0",
+  "description": "a versatile react native star review component with half star compatibility and custom images, star sizes, star count, star spacing, and value display.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Extrct/react-native-stars.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-component",
+    "ios",
+    "android",
+    "star",
+    "stars",
+    "reviews",
+    "star-review",
+    "star-reviews"
+  ],
+  "author": "Austin Montgomery <austin.munro.montgomery@gmail.com> (https://github.com/Extrct)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Extrct/react-native-stars/issues"
+  },
+  "homepage": "https://github.com/Extrct/react-native-stars#readme"
+}
