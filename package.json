@@ -1,6 +1,6 @@
 {
   "name": "react-native-stars",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "a versatile react native star review component with half star compatibility and custom images, star sizes, star count, star spacing, and value display.",
   "main": "index.js",
   "scripts": {
