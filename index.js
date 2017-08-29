@@ -40,7 +40,7 @@ export default class StarReview extends Component {
                  <View style={emptyBlockStyle}></View>
                  <View style={blockStyle}></View>
                 </View>
-                <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor:'transparent', position:'absolute'}} source={this.props.emptyStar} />
+                <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor:'transparent', position:'absolute', tintColor: this.props.tintColor}} source={this.props.emptyStar} />
               </Image>
             </View>
           );
@@ -85,6 +85,7 @@ export default class StarReview extends Component {
                 height: this.props.starSize,
                 width: this.props.starSize,
                 opacity: partial,
+                tintColor: this.props.tintColor,
                 backgroundColor:'transparent'}} source={this.props.fullStar} />
             </Image>
           </View>
@@ -115,7 +116,7 @@ export default class StarReview extends Component {
   halfStar(val,starImg,halfImg){
     return(
       <View key={val} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-        <Image style={{width: this.props.starSize, height: this.props.starSize}} source={starImg}>
+        <Image style={{width: this.props.starSize, height: this.props.starSize, tintColor: this.props.tintColor}} source={starImg}>
           <Image style={[{width: this.props.starSize, height: this.props.starSize}, {tintColor: this.props.tintColor}]} source={halfImg}/>
         </Image>
         <View style={{flexDirection: 'row', position: 'absolute'}}>
