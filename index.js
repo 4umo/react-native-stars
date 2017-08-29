@@ -26,6 +26,9 @@ export default class StarReview extends Component {
     var blockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: this.props.backingColor};
     var emptyBlockStyle = {height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent'};
     var starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor:this.props.backingColor};
+    if(this.props.tintColor){
+      starStyle.tintColor = this.props.tintColor;
+    }
     var stars = [];
       for(var i = 1; i < this.props.count + 1; i++){
         if(i == Math.floor(this.props.value) + 1){
@@ -190,6 +193,7 @@ StarReview.propTypes = {
   update: PropTypes.func,
   starSize: PropTypes.number,
   backingColor: PropTypes.string,
+  tintColor: PropTypes.string,
   opacity: PropTypes.bool,
   half: PropTypes.bool,
   spacing: PropTypes.number,
