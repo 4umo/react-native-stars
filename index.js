@@ -113,11 +113,11 @@ export default class StarReview extends Component {
           <Image style={{width: this.props.starSize, height: this.props.starSize}} source={halfImg}/>
         </Image>
         <View style={{flexDirection: 'row', position: 'absolute'}}>
-              <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} onPress={()=>{
+              <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
                 this.setState({rating: val - 0.5});
                 this.props.update(val - 0.5);
               }}/>
-              <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} onPress={()=>{
+              <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
                 this.setState({rating: val});
                 this.props.update(val);
               }}/>
@@ -145,7 +145,7 @@ export default class StarReview extends Component {
   star(val,starImg){
     return(
       <View key={val} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-        <TouchableOpacity onPress={()=>{
+        <TouchableOpacity disabled={this.props.disabled} onPress={()=>{
           this.setState({rating: val});
           this.props.update(val);
         }}>
@@ -192,10 +192,12 @@ StarReview.propTypes = {
   backingColor: PropTypes.string,
   opacity: PropTypes.bool,
   half: PropTypes.bool,
-  spacing: PropTypes.number
+  spacing: PropTypes.number,
+  disabled: PropTypes.bool,
 };
 
 StarReview.defaultProps = {
+  disabled: false,
   value: null,
   count: 5,
   rating: 0,
