@@ -86,8 +86,10 @@ For when you want to display an aggregate value. The rating will remain static u
 |**`spacing`**|number| pixel amount of separation between each star|No|`0`|
 |**`value`**|0 <= `value` <= `count`| (passing any value sets to Display Mode) star value to be displayed eg. 3.6 (of 5), 7.8 (of 10) |No|`null`|
 |**`backingColor`**|string/color| (in Display Mode) color behind the component (cannot be transparent)|No|`white`|
+|**`tintColor`**|string/color| Changes the color of all the non-transparent pixels to the tintColor |No|`null`|
 |**`opacity`**|bool|(in Display Mode) displays star values as opacity percentages (0 - 1.0)|No|`false`|
 |**`half`**|bool|(in Selection Mode) allows for half star ratings|No|`false`|
+|**`disabled`**|bool|Disable edition|No|`false`|
 
 ### Image Input
 
