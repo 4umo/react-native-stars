@@ -72,6 +72,9 @@ export default class StarReview extends Component {
     var partial = this.props.value - Math.floor(this.props.value);
     var starStyle = {height: this.props.starSize, width: this.props.starSize, opacity: 1.0, backgroundColor:'transparent'};
     var stars = [];
+    if(this.props.tintColor){
+      starStyle.tintColor = this.props.tintColor;
+    }
     for(var i = 1; i < this.props.count + 1; i++){
       if(i == Math.floor(this.props.value) + 1){
         //partial star
@@ -113,7 +116,7 @@ export default class StarReview extends Component {
     return(
       <View key={val} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
         <Image style={{width: this.props.starSize, height: this.props.starSize}} source={starImg}>
-          <Image style={{width: this.props.starSize, height: this.props.starSize}} source={halfImg}/>
+          <Image style={[{width: this.props.starSize, height: this.props.starSize}, {tintColor: this.props.tintColor}]} source={halfImg}/>
         </Image>
         <View style={{flexDirection: 'row', position: 'absolute'}}>
               <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
@@ -152,7 +155,7 @@ export default class StarReview extends Component {
           this.setState({rating: val});
           this.props.update(val);
         }}>
-          <Image style={{width: this.props.starSize, height: this.props.starSize}} source={starImg} />
+          <Image style={[{width: this.props.starSize, height: this.props.starSize}, {tintColor: this.props.tintColor}]} source={starImg} />
         </TouchableOpacity>
       </View>
     );
@@ -211,6 +214,7 @@ StarReview.defaultProps = {
   starSize: 30,
   update: ()=>{},
   backingColor: 'white',
+  tintColor: null,
   opacity: false,
   half: false,
   spacing: 0
