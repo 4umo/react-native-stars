@@ -201,9 +201,9 @@ StarReview.propTypes = {
 };
 
 StarReview.defaultProps = {
-  fullStar: require('./example-images/startFilled.png'),
-  halfStar: require('./example-images/startHalf.png'),
-  emptyStar: require('./example-images/startEmpty.png'),
+  fullStar: require('./example-images/starFilled.png'),
+  halfStar: require('./example-images/starHalf.png'),
+  emptyStar: require('./example-images/starEmpty.png'),
   disabled: false,
   value: null,
   count: 5,
