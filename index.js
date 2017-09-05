@@ -156,7 +156,7 @@ export default class StarReview extends Component {
           this.setState({rating: val});
           this.props.update(val);
         }}>
-          <Image style={[{width: this.props.starSize, height: this.props.starSize}, {tintColor: this.props.tintColor}]} source={starImg} />
+          <Image style={{width: this.props.starSize, height: this.props.starSize, tintColor: this.props.tintColor}} source={starImg} />
         </TouchableOpacity>
       </View>
     );

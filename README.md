@@ -89,7 +89,7 @@ For when you want to display an aggregate value. The rating will remain static u
 |**`tintColor`**|string/color| Changes the color of all the non-transparent pixels to the tintColor |No|`null`|
 |**`opacity`**|bool|(in Display Mode) displays star values as opacity percentages (0 - 1.0)|No|`false`|
 |**`half`**|bool|(in Selection Mode) allows for half star ratings|No|`false`|
-|**`disabled`**|bool|Disable edition|No|`false`|
+|**`disabled`**|bool|Disables onPress/buttons in Selection mode|No|`false`|
 
 ### Image Input
 
