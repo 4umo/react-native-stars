@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import {
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 
 export default class StarReview extends Component {
@@ -36,13 +37,13 @@ export default class StarReview extends Component {
           //partial star
           stars.push(
             <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-              <Image style={starStyle} source={this.props.fullStar}>
+              <ImageBackground style={starStyle} source={this.props.fullStar}>
                 <View style={{flexDirection: 'row'}}>
                  <View style={emptyBlockStyle}></View>
                  <View style={blockStyle}></View>
                 </View>
                 <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor:'transparent', position:'absolute', tintColor: this.props.tintColor}} source={this.props.emptyStar} />
-              </Image>
+              </ImageBackground>
             </View>
           );
         }else if(i > Math.floor(this.props.value) + 1){
@@ -81,14 +82,14 @@ export default class StarReview extends Component {
         //partial star
         stars.push(
           <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-            <Image style={starStyle} source={this.props.emptyStar}>
+            <ImageBackground style={starStyle} source={this.props.emptyStar}>
               <Image style={{
                 height: this.props.starSize,
                 width: this.props.starSize,
                 opacity: partial,
                 tintColor: this.props.tintColor,
                 backgroundColor:'transparent'}} source={this.props.fullStar} />
-            </Image>
+            </ImageBackground>
           </View>
         );
       }else if(i > Math.floor(this.props.value) + 1){
@@ -117,9 +118,9 @@ export default class StarReview extends Component {
   halfStar(val,starImg,halfImg){
     return(
       <View key={val} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-        <Image style={{width: this.props.starSize, height: this.props.starSize, tintColor: this.props.tintColor}} source={starImg}>
+        <ImageBackground style={{width: this.props.starSize, height: this.props.starSize, tintColor: this.props.tintColor}} source={starImg}>
           <Image style={[{width: this.props.starSize, height: this.props.starSize}, {tintColor: this.props.tintColor}]} source={halfImg}/>
-        </Image>
+        </ImageBackground>
         <View style={{flexDirection: 'row', position: 'absolute'}}>
               <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
                 this.setState({rating: val - 0.5});
