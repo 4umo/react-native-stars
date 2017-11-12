@@ -1,8 +1,6 @@
 # react-native-stars
 
-  
 [![NPM](https://nodei.co/npm/react-native-stars.png?downloads=true)](https://nodei.co/npm/react-native-stars/)
-  
 
 **react-native-stars** is a versatile react native star review component with half star compatibility and custom images, star sizes, star count, star spacing, and value display.
 
@@ -64,7 +62,7 @@ npm install react-native-stars --save
 
 ### Modes  
 
-#### Selection Mode 
+#### Selection Mode
 
 For when you want the component to respond to user input. Pressing the stars (or half stars) will call the function passed to the `update` prop. This is the default mode. Use the `rating` prop to define a default star value on page load. Use the `half` prop to allow for half star input granularity.
 
@@ -86,7 +84,6 @@ For when you want to display an aggregate value. The rating will remain static u
 |**`spacing`**|number| pixel amount of separation between each star|No|`0`|
 |**`value`**|0 <= `value` <= `count`| (passing any value sets to Display Mode) star value to be displayed eg. 3.6 (of 5), 7.8 (of 10) |No|`null`|
 |**`backingColor`**|string/color| (in Display Mode) color behind the component (cannot be transparent)|No|`white`|
-|**`tintColor`**|string/color| Changes the color of all the non-transparent pixels to the tintColor |No|`null`|
 |**`opacity`**|bool|(in Display Mode) displays star values as opacity percentages (0 - 1.0)|No|`false`|
 |**`half`**|bool|(in Selection Mode) allows for half star ratings|No|`false`|
 |**`disabled`**|bool|Disables onPress/buttons in Selection mode|No|`false`|
