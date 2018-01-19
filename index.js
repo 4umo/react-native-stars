@@ -16,6 +16,8 @@ export default class StarReview extends Component {
         rating: props.rating
     };
 
+    this.isReactElement = React.isValidElement;
+
     this.ratingMode = this.ratingMode.bind(this);
     this.halfRatingMode = this.halfRatingMode.bind(this);
     this.displayBar = this.displayBar.bind(this);
@@ -24,15 +26,17 @@ export default class StarReview extends Component {
   }
 
   displayBar(){
-    var partial = this.props.value - Math.floor(this.props.value);
-    var blockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: this.props.backingColor};
-    var emptyBlockStyle = {height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent'};
-    var starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor:this.props.backingColor};
-    var stars = [];
-      for(var i = 1; i < this.props.count + 1; i++){
+    let partial = this.props.value - Math.floor(this.props.value);
+    let blockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: this.props.backingColor};
+    let emptyBlockStyle = {height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent'};
+    let starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor:this.props.backingColor};
+    let stars = [];
+      for(let i = 1; i < this.props.count + 1; i++){
         if(i == Math.floor(this.props.value) + 1){
           //partial star
-          stars.push(
+          let halfStarComponent = this.isReactElement(this.props.halfStar) ?
+            <View key={i}>{this.props.halfStar}</View>
+            :
             <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
               <ImageBackground style={starStyle} source={this.props.fullStar}>
                 <View style={{flexDirection: 'row'}}>
@@ -41,22 +45,29 @@ export default class StarReview extends Component {
                 </View>
                 <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor:'transparent', position:'absolute'}} source={this.props.emptyStar}/>
               </ImageBackground>
-            </View>
-          );
+            </View> ;
+
+          stars.push(halfStarComponent);
         }else if(i > Math.floor(this.props.value) + 1){
           //empty stars
-          stars.push(
+          let emptyStarComponent = this.isReactElement(this.props.emptyStar) ?
+            <View key={i}>{this.props.emptyStar}</View>
+            :
             <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
               <Image style={starStyle} source={this.props.emptyStar}/>
-            </View>
-          );
+            </View> ;
+
+          stars.push(emptyStarComponent);
         }else{
           //filled stars
-          stars.push(
+          let starComponent = this.isReactElement(this.props.fullStar) ?
+            <View key={i}>{this.props.fullStar}</View>
+            :
             <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
               <Image style={starStyle} source={this.props.fullStar}/>
-            </View>
-          );
+            </View> ;
+
+          stars.push(starComponent);
         }
       }
       return(
@@ -68,13 +79,17 @@ export default class StarReview extends Component {
 
 
   displayOpaque(){
-    var partial = this.props.value - Math.floor(this.props.value);
-    var starStyle = {height: this.props.starSize, width: this.props.starSize, opacity: 1.0, backgroundColor:'transparent'};
-    var stars = [];
-    for(var i = 1; i < this.props.count + 1; i++){
+    let partial = this.props.value - Math.floor(this.props.value);
+    let starStyle = {height: this.props.starSize, width: this.props.starSize, opacity: 1.0, backgroundColor:'transparent'};
+    let stars = [];
+    for(let i = 1; i < this.props.count + 1; i++){
       if(i == Math.floor(this.props.value) + 1){
         //partial star
-        stars.push(
+        let halfStarComponent = this.isReactElement(this.props.halfStar) ?
+          <View key={i} style={{opacity: partial}}>
+            {this.props.halfStar}
+          </View>
+          :
           <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
             <ImageBackground style={starStyle} source={this.props.emptyStar}>
               <Image style={{
@@ -83,22 +98,29 @@ export default class StarReview extends Component {
                 opacity: partial,
                 backgroundColor:'transparent'}} source={this.props.fullStar}/>
             </ImageBackground>
-          </View>
-        );
+          </View> ;
+
+          stars.push(halfStarComponent);
       }else if(i > Math.floor(this.props.value) + 1){
         //empty stars
-        stars.push(
+        let emptyStarComponent = this.isReactElement(this.props.emptyStar) ?
+          <View key={i}>{this.props.emptyStar}</View>
+          :
           <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
             <Image style={starStyle} source={this.props.emptyStar}/>
           </View>
-        );
+
+        stars.push(emptyStarComponent);
       }else{
         //filled stars
-        stars.push(
+        let starComponent = this.isReactElement(this.props.fullStar) ?
+          <View key={i}>{this.props.fullStar}</View>
+          :
           <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
             <Image style={starStyle} source={this.props.fullStar}/>
           </View>
-        );
+
+        stars.push(starComponent);
       }
     }
     return(
@@ -108,33 +130,38 @@ export default class StarReview extends Component {
     );
   }
 
-  halfStar(val,starImg,halfImg){
+  halfStar(val, _star, _halfStar){
+    let halfStarComponent = _halfStar || _star;
+    let isComponent = this.isReactElement(halfStarComponent);
+    halfStarComponent = isComponent ? halfStarComponent :
+      (<ImageBackground style={{width: this.props.starSize, height: this.props.starSize}} source={_star}>
+        <Image style={{width: this.props.starSize, height: this.props.starSize}} source={_halfStar}/>
+      </ImageBackground> );
+
     return(
       <View key={val} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-        <ImageBackground style={{width: this.props.starSize, height: this.props.starSize}} source={starImg}>
-          <Image style={{width: this.props.starSize, height: this.props.starSize}} source={halfImg}/>
-        </ImageBackground>
+        {halfStarComponent}
         <View style={{flexDirection: 'row', position: 'absolute'}}>
-              <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
-                this.setState({rating: val - 0.5});
-                this.props.update(val - 0.5);
-              }}/>
-              <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
-                this.setState({rating: val});
-                this.props.update(val);
-              }}/>
-            </View>
+          <TouchableOpacity style={!isComponent && {height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
+            this.setState({rating: val - 0.5});
+            this.props.update(val - 0.5);
+          }}/>
+          <TouchableOpacity style={!isComponent && {height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
+            this.setState({rating: val});
+            this.props.update(val);
+          }}/>
+        </View>
       </View>
     );
   }
 
   halfRatingMode(){
-    var stars = [];
-    for(var i = 1; i < this.props.count + 1; i++){
-      var starImg = (i <= this.state.rating) ? this.props.fullStar : this.props.emptyStar;
-      var halfImg = (this.state.rating + 0.5 == i) ? this.props.halfStar : null;
+    let stars = [];
+    for(let i = 1; i < this.props.count + 1; i++){
+      let _star = (i <= this.state.rating) ? this.props.fullStar : this.props.emptyStar;
+      let _halfStar = (this.state.rating + 0.5 == i) ? this.props.halfStar : null;
       stars.push(
-        this.halfStar(i,starImg,halfImg)
+        this.halfStar(i, _star, _halfStar)
       );
     }
     return(
@@ -144,25 +171,29 @@ export default class StarReview extends Component {
     );
   }
 
-  star(val,starImg){
+  star(val, _star){
+    let isComponent = this.isReactElement(_star);
+    let starComponent = isComponent ? _star :
+      ( <Image style={{width: this.props.starSize, height: this.props.starSize}} source={_star}/> );
+
     return(
-      <View key={val} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
+      <View key={val} style={!isComponent && {paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
         <TouchableOpacity disabled={this.props.disabled} onPress={()=>{
           this.setState({rating: val});
           this.props.update(val);
         }}>
-          <Image style={{width: this.props.starSize, height: this.props.starSize}} source={starImg}/>
+          {starComponent}
         </TouchableOpacity>
       </View>
     );
   }
 
   ratingMode(){
-    var stars = [];
-    for(var i = 1; i < this.props.count + 1; i++){
-      var starImg = (i <= this.state.rating) ? this.props.fullStar : this.props.emptyStar;
+    let stars = [];
+    for(let i = 1; i < this.props.count + 1; i++){
+      let _star = (i <= this.state.rating) ? this.props.fullStar : this.props.emptyStar;
       stars.push(
-        this.star(i,starImg)
+        this.star(i, _star)
       );
     }
     return(
@@ -186,9 +217,9 @@ StarReview.propTypes = {
   value: PropTypes.number,
   count: PropTypes.number,
   rating: PropTypes.number,
-  emptyStar: PropTypes.number.isRequired,
-  fullStar: PropTypes.number.isRequired,
-  halfStar: PropTypes.number,
+  emptyStar: PropTypes.oneOfType([PropTypes.number, PropTypes.object]).isRequired,
+  fullStar: PropTypes.oneOfType([PropTypes.number, PropTypes.object]).isRequired,
+  halfStar: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   update: PropTypes.func,
   starSize: PropTypes.number,
   backingColor: PropTypes.string,

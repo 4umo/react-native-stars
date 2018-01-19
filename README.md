@@ -60,6 +60,38 @@ npm install react-native-stars --save
 </View>
 ```
 
+#### Custom Components for Stars
+![custom components](https://user-images.githubusercontent.com/6295083/35113671-e4532a5c-fc47-11e7-992b-515bced482d5.png)
+```js
+import { StyleSheet } from 'react-native';
+import Stars from 'react-native-stars';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+<View style={{alignItems:'center'}}>
+  <Stars
+    rating={2.5}
+    count={5}
+    half={true}
+    fullStar={<Icon name={'star'} style={[styles.myStarStyle]}/>}
+    emptyStar={<Icon name={'star-outline'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
+    halfStar={<Icon name={'star-half'} style={[styles.myStarStyle]}/>}
+  />
+</View>
+
+const styles = StyleSheet.create({
+  myStarStyle: {
+    color: 'yellow',
+    backgroundColor: 'transparent',
+    textShadowColor: 'black',
+    textShadowOffset: {width:1, height:1},
+    textShadowRadius: 2,
+  },
+  myEmptyStarStyle: {
+    color: 'white',
+  }
+});
+```
+
 ### Modes  
 
 #### Selection Mode
@@ -74,14 +106,14 @@ For when you want to display an aggregate value. The rating will remain static u
 
 | Prop | Type | Description | Required | Default |
 |---|---|---|---|---|
-|**`fullStar`**|image| of the form `require('./path/to/image.png')`|Yes|NA|
-|**`emptyStar`**|image| see above |Yes|NA|
-|**`halfStar`**|image| see above |No|`null`|
+|**`fullStar`**|image or component| Image of the form `require('./path/to/image.png')`. Component may be any valid React component.|Yes|NA|
+|**`emptyStar`**|image or component| see above |Yes|NA|
+|**`halfStar`**|image or component| see above |No|`null`|
 |**`count`**|int|the total number of stars|No|`5`|
-|**`starSize`**|int|width,height of individual star|No|`30`|
+|**`starSize`**|int|width,height of individual star (ignored when stars are components)|No|`30`|
 |**`rating`**|0 <= `rating` <= `count`| (in Selection Mode) initial default rating, int x or x.5 only |No|`0`|
 |**`update`**|function| (in Selection Mode) function to be run on ratings selection ex: `update={(val)=> this.setState({stars: val})}` |No|`()=>{}`|
-|**`spacing`**|number| pixel amount of separation between each star|No|`0`|
+|**`spacing`**|number| pixel amount of separation between each star (ignored when stars are components)|No|`0`|
 |**`value`**|0 <= `value` <= `count`| (passing any value sets to Display Mode) star value to be displayed eg. 3.6 (of 5), 7.8 (of 10) |No|`null`|
 |**`backingColor`**|string/color| (in Display Mode) color behind the component (cannot be transparent)|No|`white`|
 |**`opacity`**|bool|(in Display Mode) displays star values as opacity percentages (0 - 1.0)|No|`false`|
@@ -90,7 +122,11 @@ For when you want to display an aggregate value. The rating will remain static u
 
 ### Image Input
 
-Props `fullStar`, `emptyStar`, and `halfStar` expect image files with transparent backgrounds (.pngs), close to uniform dimensions, consistency between images (both fullStar.png and emptyStar.png are 100px/100px). Half star images are expected to be cropped as though they were full, with the center of the image intersecting the right edge of the half star object. If you're using Adobe Illustrator you can check the ['Use Artboards' box](https://cloud.githubusercontent.com/assets/9997548/22914446/87f94d72-f23e-11e6-9822-00be59ec2c1a.png) to ensure that empty space in the artboard is included during the export to .png. Half star images can, but don't need to have full outlines - both formats below are acceptible.
+Props `fullStar`, `emptyStar`, and `halfStar` may be either components or image files.
+
+Components may be any valid React component / element.  When using components for stars, the `starSize` and `spacing` props are ignored.  The component has the responsibility of sizing and spacing itself.
+
+Images should have transparent backgrounds (.pngs), close to uniform dimensions, consistency between images (both fullStar.png and emptyStar.png are 100px/100px). Half star images are expected to be cropped as though they were full, with the center of the image intersecting the right edge of the half star object. If you're using Adobe Illustrator you can check the ['Use Artboards' box](https://cloud.githubusercontent.com/assets/9997548/22914446/87f94d72-f23e-11e6-9822-00be59ec2c1a.png) to ensure that empty space in the artboard is included during the export to .png. Half star images can, but don't need to have full outlines - both formats below are acceptible.
 
 example compatible images:
 
