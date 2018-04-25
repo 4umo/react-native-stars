@@ -25,6 +25,14 @@ export default class StarReview extends Component {
     this.star = this.star.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.rating !== nextProps.rating) {
+      this.setState({
+        rating: nextProps.rating,
+      });
+    }
+  }
+
   displayBar(){
     let partial = this.props.value - Math.floor(this.props.value);
     let blockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: this.props.backingColor};
