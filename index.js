@@ -150,11 +150,11 @@ export default class StarReview extends Component {
       <View key={val} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
         {halfStarComponent}
         <View style={{flexDirection: 'row', position: 'absolute'}}>
-          <TouchableOpacity style={!isComponent && {height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
+          <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
             this.setState({rating: val - 0.5});
             this.props.update(val - 0.5);
           }}/>
-          <TouchableOpacity style={!isComponent && {height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
+          <TouchableOpacity style={{height:this.props.starSize,width:this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
             this.setState({rating: val});
             this.props.update(val);
           }}/>
