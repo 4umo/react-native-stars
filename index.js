@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground
 } from 'react-native'
+import testID from 'react-native-testid';
 
 export default class StarReview extends Component {
   constructor(props) {
@@ -111,11 +112,11 @@ export default class StarReview extends Component {
       <View key={index} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
         {starComponent}
         <View style={{flexDirection: 'row', position: 'absolute'}}>
-          <TouchableOpacity style={{height: this.props.starSize, width: this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
+          <TouchableOpacity {...testID(`star${index - 0.5}`)} style={{height: this.props.starSize, width: this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
             this.setState({rating: index - 0.5})
             this.props.update(index - 0.5)
           }}/>
-          <TouchableOpacity style={{height: this.props.starSize, width: this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
+          <TouchableOpacity {...testID(`star${index}`)} style={{height: this.props.starSize, width: this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
             this.setState({rating: index})
             this.props.update(index)
           }}/>
@@ -148,7 +149,7 @@ export default class StarReview extends Component {
 
     return (
       <View key={index} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-        <TouchableOpacity disabled={this.props.disabled} onPress={()=>{
+        <TouchableOpacity {...testID(`star${index - 0.5}`)} disabled={this.props.disabled} onPress={()=>{
           this.setState({rating: index})
           this.props.update(index)
         }}>
