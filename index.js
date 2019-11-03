@@ -19,12 +19,12 @@ export default class StarReview extends Component {
     this.isReactElement = React.isValidElement
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
+    let previousDefaultRating = prevProps.rating || prevProps.default
     let defaultRating = this.props.rating || this.props.default
-    let nextDefaultRating = nextProps.rating || nextProps.default
-    if (defaultRating !== nextDefaultRating) {
+    if (previousDefaultRating !== defaultRating) {
       this.setState({
-        rating: nextDefaultRating,
+        rating: defaultRating,
       })
     }
   }
