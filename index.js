@@ -73,7 +73,7 @@ export default class StarReview extends Component {
           </View>
 
         stars.push(starComponent)
-      } else if (i > Math.floor(this.displayValue) + 1) {
+      } else if (i > Math.ceil(this.displayValue)) {
         //empty stars
         const emptyStarComponent = this.isReactElement(this.props.emptyStar) ?
           <View key={i}>{this.props.emptyStar}</View>
