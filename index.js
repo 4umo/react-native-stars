@@ -63,14 +63,16 @@ export default class StarReview extends Component {
     const starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor: this.props.backingColor}
     const stars = []
     for (let i = 1; i < this.props.count + 1; i++) {
-      if (i == Math.floor(this.displayValue) + 1 && partial > 0) {
-        //partial star
-        const partialStarComponent =
+      if (i <= this.displayValue) {
+        //filled stars
+        const starComponent = this.isReactElement(this.props.fullStar) ?
+          <View key={i}>{this.props.fullStar}</View>
+          :
           <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-            {this.createPartialStar(partial, blockStyle, emptyBlockStyle, starStyle)}
+            <Image style={starStyle} source={this.props.fullStar}/>
           </View>
 
-        stars.push(partialStarComponent)
+        stars.push(starComponent)
       } else if (i > Math.floor(this.displayValue) + 1) {
         //empty stars
         const emptyStarComponent = this.isReactElement(this.props.emptyStar) ?
@@ -82,15 +84,13 @@ export default class StarReview extends Component {
 
         stars.push(emptyStarComponent)
       } else {
-        //filled stars
-        const starComponent = this.isReactElement(this.props.fullStar) ?
-          <View key={i}>{this.props.fullStar}</View>
-          :
+        //partial star
+        const partialStarComponent =
           <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-            <Image style={starStyle} source={this.props.fullStar}/>
+            {this.createPartialStar(partial, blockStyle, emptyBlockStyle, starStyle)}
           </View>
 
-        stars.push(starComponent)
+        stars.push(partialStarComponent)
       }
     }
     return (
