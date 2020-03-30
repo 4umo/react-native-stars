@@ -44,13 +44,16 @@ export default class StarReview extends Component {
             backgroundColor:'transparent'}} source={this.props.fullStar}/>
         </ImageBackground>
       :
-      <ImageBackground style={starStyle} source={this.props.fullStar}>
-        <View style={{flexDirection: 'row'}}>
-         <View style={emptyBlockStyle}></View>
-         <View style={blockStyle}></View>
-        </View>
-        <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute'}} source={this.props.emptyStar}/>
-      </ImageBackground>
+      this.isReactElement(this.props.halfStar) ?
+        {this.props.halfStar}
+        :
+        <ImageBackground style={starStyle} source={this.props.fullStar}>
+          <View style={{flexDirection: 'row'}}>
+           <View style={emptyBlockStyle}></View>
+           <View style={blockStyle}></View>
+          </View>
+          <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute'}} source={this.props.emptyStar}/>
+        </ImageBackground>
   }
 
   displayMode() {
