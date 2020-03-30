@@ -45,7 +45,7 @@ export default class StarReview extends Component {
         </ImageBackground>
       :
       this.isReactElement(this.props.halfStar) ?
-        {this.props.halfStar}
+        <>{this.props.halfStar}</>
         :
         <ImageBackground style={starStyle} source={this.props.fullStar}>
           <View style={{flexDirection: 'row'}}>
