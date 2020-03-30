@@ -63,7 +63,7 @@ export default class StarReview extends Component {
     const starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor: this.props.backingColor}
     const stars = []
     for (let i = 1; i < this.props.count + 1; i++) {
-      if (partial > 0) {
+      if (i == Math.floor(this.displayValue) + 1 && partial > 0) {
         //partial star
         const partialStarComponent =
           <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
