@@ -46,10 +46,10 @@ export default class StarReview extends Component {
       :
       <ImageBackground style={starStyle} source={this.props.emptyStar}>
         <View style={{flexDirection: 'row' }}>
-           <View style={blockStyle}>
+          <View style={blockStyle}>
             <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar}/>
-           </View>
-           <View style={emptyBlockStyle}></View>
+          </View>
+          <View style={emptyBlockStyle}></View>
         </View>
       </ImageBackground>
   }
