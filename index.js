@@ -47,19 +47,20 @@ export default class StarReview extends Component {
       this.isReactElement(this.props.halfStar) ?
         <>{this.props.halfStar}</>
         :
-        <ImageBackground style={starStyle} source={this.props.fullStar}>
-          <View style={{flexDirection: 'row'}}>
-           <View style={emptyBlockStyle}></View>
-           <View style={blockStyle}></View>
+        <ImageBackground style={starStyle} source={this.props.emptyStar}>
+          <View style={{flexDirection: 'row' }}>
+            <View style={blockStyle}>
+              <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar}/>
+            </View>
+            <View style={emptyBlockStyle}></View>
           </View>
-          <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute'}} source={this.props.emptyStar}/>
         </ImageBackground>
   }
 
   displayMode() {
     const partial = this.displayValue - Math.floor(this.displayValue)
-    const blockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: this.props.backingColor}
-    const emptyBlockStyle = {height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent'}
+    const emptyBlockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: 'transparent'}
+    const blockStyle = {height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent', overflow: 'hidden'}
     const starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor: this.props.backingColor}
     const stars = []
     for (let i = 1; i < this.props.count + 1; i++) {
