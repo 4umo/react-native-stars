@@ -188,17 +188,14 @@ export default class StarReview extends Component {
 }
 
 StarReview.propTypes = {
-  value: PropTypes.number,
   display: PropTypes.number,
   count: PropTypes.number,
-  rating: PropTypes.number,
   default: PropTypes.number,
   emptyStar: PropTypes.oneOfType([PropTypes.number, PropTypes.object]).isRequired,
   fullStar: PropTypes.oneOfType([PropTypes.number, PropTypes.object]).isRequired,
   halfStar: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   update: PropTypes.func,
   starSize: PropTypes.number,
-  backingColor: PropTypes.string,
   opacity: PropTypes.bool,
   half: PropTypes.bool,
   spacing: PropTypes.number,
@@ -210,14 +207,11 @@ StarReview.defaultProps = {
   halfStar: require('./example-images/starHalf.png'),
   emptyStar: require('./example-images/starEmpty.png'),
   disabled: false,
-  value: null,
   display: null,
   count: 5,
-  rating: 0,
   default: 0,
   starSize: 30,
   update: () => {},
-  backingColor: 'white',
   opacity: false,
   half: false,
   spacing: 0

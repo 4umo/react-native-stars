@@ -54,7 +54,6 @@ npm install react-native-stars --save
     spacing={8}
     count={5}
     starSize={40}
-    backingColor='cornsilk' {/* must NOT be 'transparent' */}
     fullStar= {require('./images/starFilled.png')}
     emptyStar= {require('./images/starEmpty.png')}/>
 </View>
@@ -116,7 +115,6 @@ For when you want to display an aggregate value. The value displayed will remain
 |**`update`**|function| (in Selection Mode) function to be run on a given star selection selection ex: `update={(val)=> this.setState({stars: val})}` |No|`()=>{}`|
 |**`spacing`**|number| pixel amount of separation between each star|No|`0`|
 |**`display`**|0 <= `display` <= `count`| (passing any value sets to Display Mode) star value to be displayed eg. 3.6 (of 5), 7.8 (of 10) |No|`null`|
-|**`backingColor`**|string/color| (in Display Mode) color behind the component (cannot be transparent)|No|`white`|
 |**`opacity`**|bool|(in Display Mode) displays star values as opacity percentages (0 - 1.0)|No|`false`|
 |**`half`**|bool|(in Selection Mode) allows for half star ratings|No|`false`|
 |**`disabled`**|bool|Disables onPress/buttons in Selection mode|No|`false`|
@@ -134,6 +132,16 @@ example compatible images:
 ![stars](https://cloud.githubusercontent.com/assets/9997548/22914475/a6ff5dec-f23e-11e6-86b8-01e74eee6e90.jpg)
 
 I've included a set in example-images if you need something basic.
+
+### Roadmap
+
+✅**Custom Components** `fullStar`, `halfStar`, `emptyStar` properties now accept component inputs rather than exclusively image inputs.
+
+✅**Display Mode Transparency** non-transparent backingColor no longer required for display mode.
+
+_ **Cycle Selection** for half star selection mode - instead of two halves of a star each having its own button + update value, the entire star is one button - behaving like a 3-stage toggle when clicked in succession. Values will cycle between 0 -> 0.5 -> 1 -> 0 and will respect the default parameter on initialization.
+
+_ **Slide Selection** capability - component respects a continuous user input, updating component rating state according to the half/full star granularity configuration (defaults to full star)
 
 ## Contributing
 
