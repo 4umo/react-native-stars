@@ -44,14 +44,20 @@ export default class StarReview extends Component {
             backgroundColor:'transparent'}} source={this.props.fullStar}/>
         </ImageBackground>
       :
-      <ImageBackground style={starStyle} source={this.props.emptyStar}>
-        <View style={{flexDirection: 'row' }}>
-          <View style={blockStyle}>
-            <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar}/>
-          </View>
-          <View style={emptyBlockStyle}></View>
+      this.isReactElement(this.props.fullStar) ?
+        <View style={{flexDirection: 'row'}}>
+          <View>{this.props.emptyStar}</View>
+          <View style={{maxWidth: `${Math.round(partial * 100)}%`, overflow: 'hidden', position: 'absolute'}}>{this.props.fullStar}</View>
         </View>
-      </ImageBackground>
+        :
+        <ImageBackground style={starStyle} source={this.props.emptyStar}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={blockStyle}>
+              <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar}/>
+            </View>
+            <View style={emptyBlockStyle}></View>
+          </View>
+        </ImageBackground>
   }
 
   displayMode() {
@@ -59,12 +65,13 @@ export default class StarReview extends Component {
     const emptyBlockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: 'transparent'}
     const blockStyle = {height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent', overflow: 'hidden'}
     const starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor: this.props.backingColor}
+    const spacingStyle = {paddingLeft: this.props.spacing / 2, paddingRight: this.props.spacing / 2}
     const stars = []
     for (let i = 1; i < this.props.count + 1; i++) {
       if (i == Math.floor(this.displayValue) + 1) {
         //partial star
         const partialStarComponent =
-          <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
+          <View key={i} style={spacingStyle}>
             {this.createPartialStar(partial, blockStyle, emptyBlockStyle, starStyle)}
           </View>
 
@@ -72,9 +79,9 @@ export default class StarReview extends Component {
       } else if (i > Math.floor(this.displayValue) + 1) {
         //empty stars
         const emptyStarComponent = this.isReactElement(this.props.emptyStar) ?
-          <View key={i}>{this.props.emptyStar}</View>
+          <View style={spacingStyle} key={i}>{this.props.emptyStar}</View>
           :
-          <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
+          <View key={i} style={spacingStyle}>
             <Image style={starStyle} source={this.props.emptyStar}/>
           </View>
 
@@ -82,9 +89,9 @@ export default class StarReview extends Component {
       } else {
         //filled stars
         const starComponent = this.isReactElement(this.props.fullStar) ?
-          <View key={i}>{this.props.fullStar}</View>
+          <View style={spacingStyle} key={i}>{this.props.fullStar}</View>
           :
-          <View key={i} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
+          <View key={i} style={spacingStyle}>
             <Image style={starStyle} source={this.props.fullStar}/>
           </View>
 
