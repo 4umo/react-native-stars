@@ -139,6 +139,10 @@ I've included a set in example-images if you need something basic.
 
 ✅**Display Mode Transparency** non-transparent backingColor no longer required for display mode.
 
+_ **Dev Upgrades** adding typescript, linting, and react best practices
+
+_ **Display Mode Interpolation** marginal partial star display amounts like 0.1 and 0.9 often look 'too small' or 'too big'. This feature would use interpolation to create a more natural look and feel for partial display amounts.
+
 _ **Cycle Selection** for half star selection mode - instead of two halves of a star each having its own button + update value, the entire star is one button - behaving like a 3-stage toggle when clicked in succession. Values will cycle between 0 -> 0.5 -> 1 -> 0 and will respect the default parameter on initialization.
 
 _ **Slide Selection** capability - component respects a continuous user input, updating component rating state according to the half/full star granularity configuration (defaults to full star)
