@@ -182,7 +182,7 @@ export default class StarReview extends Component {
   }
 
   render() {
-    const view = this.displayValue == null ?
+    const view = (this.displayValue === null || this.displayValue ===undefined) ?
       (this.props.half ? this.halfRatingMode() : this.fullRatingMode())
       :
       this.displayMode()
