@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   View,
-  Image,
   TouchableOpacity,
   ImageBackground
 } from 'react-native'
+import FastImage from 'react-native-fast-image';
 
 export default class StarReview extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ export default class StarReview extends Component {
         </View>
         :
         <ImageBackground style={starStyle} source={this.props.emptyStar}>
-          <Image style={{
+          <FastImage style={{
             height: this.props.starSize,
             width: this.props.starSize,
             opacity: partial,
@@ -53,7 +53,7 @@ export default class StarReview extends Component {
         <ImageBackground style={starStyle} source={this.props.emptyStar}>
           <View style={{flexDirection: 'row'}}>
             <View style={blockStyle}>
-              <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar}/>
+              <FastImage style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar}/>
             </View>
             <View style={emptyBlockStyle}></View>
           </View>
@@ -82,7 +82,7 @@ export default class StarReview extends Component {
           <View style={spacingStyle} key={i}>{this.props.emptyStar}</View>
           :
           <View key={i} style={spacingStyle}>
-            <Image style={starStyle} source={this.props.emptyStar}/>
+            <FastImage style={starStyle} source={this.props.emptyStar}/>
           </View>
 
         stars.push(emptyStarComponent)
@@ -92,7 +92,7 @@ export default class StarReview extends Component {
           <View style={spacingStyle} key={i}>{this.props.fullStar}</View>
           :
           <View key={i} style={spacingStyle}>
-            <Image style={starStyle} source={this.props.fullStar}/>
+            <FastImage style={starStyle} source={this.props.fullStar}/>
           </View>
 
         stars.push(starComponent)
@@ -112,7 +112,7 @@ export default class StarReview extends Component {
       starComponent
       :
       <ImageBackground style={{width: this.props.starSize, height: this.props.starSize}} source={star}>
-        <Image style={{width: this.props.starSize, height: this.props.starSize}} source={halfStar}/>
+        <FastImage style={{width: this.props.starSize, height: this.props.starSize}} source={halfStar}/>
       </ImageBackground>
 
     return (
@@ -152,7 +152,7 @@ export default class StarReview extends Component {
     const starComponent = this.isReactElement(star) ?
       star
       :
-      <Image style={{width: this.props.starSize, height: this.props.starSize}} source={star}/>
+      <FastImage style={{width: this.props.starSize, height: this.props.starSize}} source={star}/>
 
     return (
       <View key={index} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
