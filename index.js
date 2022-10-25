@@ -32,7 +32,7 @@ export default class StarReview extends Component {
   createPartialStar(partial, blockStyle, emptyBlockStyle, starStyle) {
     return this.props.opacity ?
       this.isReactElement(this.props.fullStar) ?
-        <View style={{opacity: partial}}>
+        <View style={{ opacity: partial }}>
           {this.props.fullStar}
         </View>
         :
@@ -41,19 +41,20 @@ export default class StarReview extends Component {
             height: this.props.starSize,
             width: this.props.starSize,
             opacity: partial,
-            backgroundColor:'transparent'}} source={this.props.fullStar}/>
+            backgroundColor: 'transparent'
+          }} source={this.props.fullStar} />
         </ImageBackground>
       :
       this.isReactElement(this.props.fullStar) ?
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <View>{this.props.emptyStar}</View>
-          <View style={{maxWidth: `${Math.round(partial * 100)}%`, overflow: 'hidden', position: 'absolute'}}>{this.props.fullStar}</View>
+          <View style={{ maxWidth: `${Math.round(partial * 100)}%`, overflow: 'hidden', position: 'absolute' }}>{this.props.fullStar}</View>
         </View>
         :
         <ImageBackground style={starStyle} source={this.props.emptyStar}>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <View style={blockStyle}>
-              <Image style={{height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar}/>
+              <Image style={{ height: this.props.starSize, width: this.props.starSize, backgroundColor: 'transparent', position: 'absolute' }} source={this.props.fullStar} />
             </View>
             <View style={emptyBlockStyle}></View>
           </View>
@@ -62,10 +63,10 @@ export default class StarReview extends Component {
 
   displayMode() {
     const partial = this.displayValue - Math.floor(this.displayValue)
-    const emptyBlockStyle = {height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: 'transparent'}
-    const blockStyle = {height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent', overflow: 'hidden'}
-    const starStyle = {height: this.props.starSize, width: this.props.starSize, backgroundColor: this.props.backingColor}
-    const spacingStyle = {paddingLeft: this.props.spacing / 2, paddingRight: this.props.spacing / 2}
+    const emptyBlockStyle = { height: this.props.starSize, width: this.props.starSize * (1.0 - partial), backgroundColor: 'transparent' }
+    const blockStyle = { height: this.props.starSize, width: this.props.starSize * partial, backgroundColor: 'transparent', overflow: 'hidden' }
+    const starStyle = { height: this.props.starSize, width: this.props.starSize, backgroundColor: this.props.backingColor }
+    const spacingStyle = { paddingLeft: this.props.spacing / 2, paddingRight: this.props.spacing / 2 }
     const stars = []
     for (let i = 1; i < this.props.count + 1; i++) {
       if (i == Math.floor(this.displayValue) + 1) {
@@ -82,7 +83,7 @@ export default class StarReview extends Component {
           <View style={spacingStyle} key={i}>{this.props.emptyStar}</View>
           :
           <View key={i} style={spacingStyle}>
-            <Image style={starStyle} source={this.props.emptyStar}/>
+            <Image style={starStyle} source={this.props.emptyStar} />
           </View>
 
         stars.push(emptyStarComponent)
@@ -92,7 +93,7 @@ export default class StarReview extends Component {
           <View style={spacingStyle} key={i}>{this.props.fullStar}</View>
           :
           <View key={i} style={spacingStyle}>
-            <Image style={starStyle} source={this.props.fullStar}/>
+            <Image style={starStyle} source={this.props.fullStar} />
           </View>
 
         stars.push(starComponent)
@@ -100,7 +101,7 @@ export default class StarReview extends Component {
     }
     return (
       <View>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>{stars}</View>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>{stars}</View>
       </View>
     )
   }
@@ -111,22 +112,27 @@ export default class StarReview extends Component {
     starComponent = this.isReactElement(starComponent) ?
       starComponent
       :
-      <ImageBackground style={{width: this.props.starSize, height: this.props.starSize}} source={star}>
-        <Image style={{width: this.props.starSize, height: this.props.starSize}} source={halfStar}/>
+      <ImageBackground style={{ width: this.props.starSize, height: this.props.starSize }} source={star}>
+        <Image style={{ width: this.props.starSize, height: this.props.starSize }} source={halfStar} />
       </ImageBackground>
 
     return (
-      <View key={index} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
+      <View key={index} style={{ paddingLeft: this.props.spacing / 2, paddingRight: this.props.spacing / 2 }}>
         {starComponent}
-        <View style={{flexDirection: 'row', position: 'absolute'}}>
-          <TouchableOpacity style={{height: this.props.starSize, width: this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
-            this.setState({rating: index - 0.5})
-            this.props.update(index - 0.5)
-          }}/>
-          <TouchableOpacity style={{height: this.props.starSize, width: this.props.starSize/2}} disabled={this.props.disabled} onPress={()=>{
-            this.setState({rating: index})
+        <View style={{ flexDirection: 'row', position: 'absolute' }}>
+          <TouchableOpacity style={{ height: this.props.starSize, width: this.props.starSize / 2 }} disabled={this.props.disabled} onPress={() => {
+            if (index == 1 && this.props.minimumOneStar) {
+              this.setState({ rating: index - 0 })
+              this.props.update(index - 0)
+            } else {
+              this.setState({ rating: index - 0.5 })
+              this.props.update(index - 0.5)
+            }
+          }} />
+          <TouchableOpacity style={{ height: this.props.starSize, width: this.props.starSize / 2 }} disabled={this.props.disabled} onPress={() => {
+            this.setState({ rating: index })
             this.props.update(index)
-          }}/>
+          }} />
         </View>
       </View>
     )
@@ -142,7 +148,7 @@ export default class StarReview extends Component {
       )
     }
     return (
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         {stars}
       </View>
     )
@@ -152,13 +158,18 @@ export default class StarReview extends Component {
     const starComponent = this.isReactElement(star) ?
       star
       :
-      <Image style={{width: this.props.starSize, height: this.props.starSize}} source={star}/>
+      <Image style={{ width: this.props.starSize, height: this.props.starSize }} source={star} />
 
     return (
-      <View key={index} style={{paddingLeft: this.props.spacing/2, paddingRight: this.props.spacing/2}}>
-        <TouchableOpacity disabled={this.props.disabled} onPress={()=>{
-          this.setState({rating: index})
-          this.props.update(index)
+      <View key={index} style={{ paddingLeft: this.props.spacing / 2, paddingRight: this.props.spacing / 2 }}>
+        <TouchableOpacity disabled={this.props.disabled} onPress={() => {
+          if (index == 1 && this.props.minimumOneStar) {
+            this.setState({ rating: index - 0 })
+            this.props.update(index - 0)
+          } else {
+            this.setState({ rating: index })
+            this.props.update(index)
+          }
         }}>
           {starComponent}
         </TouchableOpacity>
@@ -175,7 +186,7 @@ export default class StarReview extends Component {
       )
     }
     return (
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         {stars}
       </View>
     )
@@ -207,6 +218,7 @@ StarReview.propTypes = {
   half: PropTypes.bool,
   spacing: PropTypes.number,
   disabled: PropTypes.bool,
+  minimumOneStar: PropTypes.bool
 }
 
 StarReview.defaultProps = {
@@ -218,7 +230,7 @@ StarReview.defaultProps = {
   count: 5,
   default: 0,
   starSize: 30,
-  update: () => {},
+  update: () => { },
   opacity: false,
   half: false,
   spacing: 0
