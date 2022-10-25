@@ -118,6 +118,7 @@ For when you want to display an aggregate value. The value displayed will remain
 |**`opacity`**|bool|(in Display Mode) displays star values as opacity percentages (0 - 1.0)|No|`false`|
 |**`half`**|bool|(in Selection Mode) allows for half star ratings|No|`false`|
 |**`disabled`**|bool|Disables onPress/buttons in Selection mode|No|`false`|
+|**`minimumOneStar`**|bool|When true user can not be able to decrease star count less then one|No|`false`|
 
 ### Image Input
 
